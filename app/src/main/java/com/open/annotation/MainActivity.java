@@ -2,6 +2,7 @@ package com.open.annotation;
 
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,8 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.open.annotation.activity.CommonTitleBarActivity;
 import com.open.annotation.adapter.MainAdapter;
 import com.open.annotation.bean.CommonBean;
+import com.open.annotation.fragment.MainPullFragment;
 
 import java.util.ArrayList;
 
@@ -22,10 +25,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 
-public class MainActivity extends BaseAnnotationActivity<CommonBean> {
-    @BindView(R.id.listview)
-    ListView listview;
-    MainAdapter adapter;
+public class MainActivity extends CommonTitleBarActivity<CommonBean> {
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,20 +34,13 @@ public class MainActivity extends BaseAnnotationActivity<CommonBean> {
     }
 
     @Override
-    void initValues() {
-        super.initValues();
-        Log.d(TAG, "initValues=====");
-        list = new ArrayList<>();
-        list.add(new CommonBean());
-        list.add(new CommonBean());
-        list.add(new CommonBean());
-        adapter = new MainAdapter(this, list);
-        listview.setAdapter(adapter);
+    public void initValues() {
+        setCenterTextValue("ssss");
     }
 
-
-    @OnItemClick(R.id.listview)
-    public void onItemClick(int position) {
-        Toast.makeText(getBaseContext(), "item" + position, Toast.LENGTH_SHORT).show();
+    @Override
+    public void addfragment() {
+        Fragment fragment = MainPullFragment.newInstance(this,true);
+        getSupportFragmentManager().beginTransaction().replace(R.id.layout_main, fragment).commit();
     }
 }

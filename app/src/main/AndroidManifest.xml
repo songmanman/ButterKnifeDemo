@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.open.annotation.BaseAnnotationActivity"/>
-
+        <activity android:name="com.open.annotation.activity.CommonTitleBarActivity"/>
 
     </application>
 

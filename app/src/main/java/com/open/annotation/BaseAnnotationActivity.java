@@ -25,9 +25,9 @@ import butterknife.Unbinder;
  * ****************************************************************************************************************************************************************************
  *
  * @author :fengguangjing
- * @createTime: 2017/12/615:44
+ * @createTime: 2017/12/6 15:44
  * @version:2.10
- * @modifyTime:2017/12/615:44
+ * @modifyTime:2017/12/6 15:44
  * @modifyAuthor:fengguangjing
  * @description: ***************************************************************************************************************************************************************************
  **/
@@ -61,13 +61,13 @@ public class BaseAnnotationActivity<T> extends AppCompatActivity {
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
-        injectView();
+//        injectView();
     }
 
     @Override
     public void setContentView(View view) {
         super.setContentView(view);
-        injectView();
+//        injectView();
     }
 
     /**
@@ -97,14 +97,14 @@ public class BaseAnnotationActivity<T> extends AppCompatActivity {
         }
 //        View view = LayoutInflater.from(this).inflate(R.layout.activity_base_annotation,null);
         if (titlebar){
-            layout_titlebar = (RelativeLayout) findViewById(R.id.layout_titlebar);
+            layout_titlebar = (RelativeLayout)  findViewById(R.id.layout_titlebar);
             layout_titlebar.addView(LayoutInflater.from(this).inflate(layoutId, null),
                     new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
                             150
                     )
                     );
         }else{
-            layout_content = (RelativeLayout) findViewById(R.id.layout_content);
+            layout_content = (RelativeLayout)  findViewById(R.id.layout_content);
             layout_content.addView(LayoutInflater.from(this).inflate(layoutId, null),
                     new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
                             RelativeLayout.LayoutParams.MATCH_PARENT
@@ -112,6 +112,7 @@ public class BaseAnnotationActivity<T> extends AppCompatActivity {
             );
         }
 //        setContentView(view);
+        injectView();
         initValues();
         bindEvent();
         addfragment();

@@ -25,58 +25,14 @@ import java.util.List;
  * @description: *************************************************************************************************************************************************************************
  **/
 @EBean
-public class MainAnnotationAdapter extends BaseAdapter {
-    @RootContext
-    Context context;
-    List<CommonBean> list;
-
-    @AfterInject
-    void init() {
-        this.list = new ArrayList<CommonBean>();
+public class MainAnnotationAdapter extends CommonAdapter<CommonBean,MainAnnotationViewHolder> {
+    public MainAnnotationAdapter(Context context) {
+        super(context);
     }
 
     @Override
-    public int getCount() {
-        return this.list.size();
+    MainAnnotationViewHolder build(Context context) {
+        return  MainAnnotationViewHolder_.build(context);
     }
-
-    @Override
-    public CommonBean getItem(int position) {
-        return this.list.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-          MainAnnotationViewHolder view = null;
-        if (convertView == null) {
-            view = MainAnnotationViewHolder_.build(context);
-        } else {
-            view = (MainAnnotationViewHolder) convertView;
-        }
-        view.bind(getItem(position));
-        return view;
-    }
-
-    public void update(List<CommonBean> items) {
-        this.list.clear();
-        this.list.addAll(items);
-        notifyDataSetChanged();
-    }
-
-    public void append(List<CommonBean> items) {
-        this.list.addAll(items);
-        notifyDataSetChanged();
-    }
-
-    public void delete(CommonBean item) {
-        this.list.remove(item);
-        notifyDataSetChanged();
-    }
-
 }
 

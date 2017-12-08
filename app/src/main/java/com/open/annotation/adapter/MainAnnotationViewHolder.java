@@ -21,7 +21,7 @@ import org.androidannotations.annotations.ViewById;
  * @description: *************************************************************************************************************************************************************************
  **/
 @EViewGroup(R.layout.adapter_main)
-public  class MainAnnotationViewHolder extends RelativeLayout {
+public  class MainAnnotationViewHolder extends ViewHolder<CommonBean> {
     @ViewById
     TextView txt_name;
 
@@ -29,6 +29,7 @@ public  class MainAnnotationViewHolder extends RelativeLayout {
         super(context);
     }
 
+    @Override
     public void bind(CommonBean item) {
         txt_name.setText("111");
     }

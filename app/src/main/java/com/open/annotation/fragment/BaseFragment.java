@@ -17,6 +17,7 @@ import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListene
 import com.open.annotation.AnimateFirstDisplayListener;
 import com.open.annotation.MessageHanlder;
 
+import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
 
 import java.util.ArrayList;
@@ -46,9 +47,9 @@ public abstract class BaseFragment<T,F extends BaseFragment> extends Fragment {
      *
      * @return
      */
-    public abstract int getContentViewId();
+//    public abstract int getContentViewId();
 
-    protected View mRootView;
+//    protected View mRootView;
     protected Context mContext;
     /***分页信息*/
     int pageNo;
@@ -59,20 +60,15 @@ public abstract class BaseFragment<T,F extends BaseFragment> extends Fragment {
     public boolean isVisibleToUser;
     private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mRootView = inflater.inflate(getContentViewId(), container, false);
-        this.mContext = getActivity();
-        return mRootView;
-    }
+//    @Nullable
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+//        mRootView = inflater.inflate(getContentViewId(), container, false);
+//        this.mContext = getActivity();
+//        return mRootView;
+//    }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        initValues();
-        bindEvent();
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,9 +81,10 @@ public abstract class BaseFragment<T,F extends BaseFragment> extends Fragment {
     /**
      * 初始化fragment控件
      */
-    protected abstract void initValues();
+    @AfterViews
+    void initValues(){}
 
-
+    @AfterViews
     void bindEvent() {
 
     }

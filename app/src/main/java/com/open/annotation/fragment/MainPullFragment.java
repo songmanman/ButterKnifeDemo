@@ -2,13 +2,25 @@ package com.open.annotation.fragment;
 
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.widget.ListView;
+import android.widget.Toast;
 
-import com.open.annotation.adapter.MainAdapter;
-import com.open.annotation.adapter.MainViewHolder;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.open.annotation.R;
+import com.open.annotation.adapter.MainAnnotationAdapter;
 import com.open.annotation.bean.CommonBean;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ItemClick;
+import org.androidannotations.annotations.ItemLongClick;
+import org.androidannotations.annotations.ViewById;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ****************************************************************************************************************************************************************************
@@ -20,27 +32,40 @@ import org.androidannotations.annotations.EFragment;
  * @modifyAuthor:fengguangjing
  * @description: *************************************************************************************************************************************************************************
  **/
-@EFragment
-public class MainPullFragment extends CommonPullToRefreshListViewFragment<CommonBean,MainViewHolder,MainAdapter> {
+@EFragment(R.layout.common_pulltorefresh_listview)
+public class MainPullFragment extends Fragment {
+    @ViewById
+    ListView pullrefreshlist;
+    @Bean
+    MainAnnotationAdapter adapter;
 
-    public static CommonPullToRefreshListViewFragment newInstance(Context mContext, boolean isVisibleToUser) {
-        MainPullFragment fragment = new MainPullFragment();
-        fragment.setFragment(fragment);
-        fragment.mContext = mContext;
-        fragment.setUserVisibleHint(isVisibleToUser);
-        return fragment;
+    @AfterViews
+    public void initValue() {
+        Log.d("MainPullFragment","initValue");
+        pullrefreshlist.setAdapter(adapter);
+        List<CommonBean> list = new ArrayList<>();
+        list.add(new CommonBean());
+        list.add(new CommonBean());
+        list.add(new CommonBean());
+        list.add(new CommonBean());
+        adapter.append(list);
     }
 
-    @Override
-    protected void initValues() {
-        super.initValues();
-        list.add(new CommonBean());
-        list.add(new CommonBean());
-        list.add(new CommonBean());
-        Log.d(TAG,"=====ssss====");
-        adapter = new MainAdapter(getActivity());
-        adapter.update(list);
-        mPullToRefreshListView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+
+    /**
+     * 名字必须是这个
+     */
+    @ItemClick(R.id.pullrefreshlist)
+    void  ItemClicked(CommonBean item) {
+        Toast.makeText(getActivity(), "点击了" + item.toString(), Toast.LENGTH_SHORT).show();
     }
+
+    /**
+     * 名字必须是这个
+     */
+    @ItemLongClick(R.id.pullrefreshlist)
+    void  ItemLongClicked(CommonBean item) {
+        adapter.delete(item);
+    }
+
 }

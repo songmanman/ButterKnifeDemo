@@ -18,8 +18,7 @@ import android.widget.Toast;
 
 import com.open.annotation.activity.CommonTitleBarActivity;
 import com.open.annotation.bean.CommonBean;
-import com.open.annotation.fragment.MainPullFragment;
-import com.open.annotation.fragment.MainPullFragment_;
+import com.open.annotation.fragment.MainPullFragment2_;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -45,8 +44,7 @@ public class MainActivity extends FragmentActivity {
     @AfterViews
     public void addfragment() {
         Log.d("MainActivity","addfragment");
-        Fragment fragment = new MainPullFragment() ;
-        getSupportFragmentManager().beginTransaction().replace(R.id.layout_main, MainPullFragment_.builder().build()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.layout_main, MainPullFragment2_.builder().build()).commit();
     }
 }
 

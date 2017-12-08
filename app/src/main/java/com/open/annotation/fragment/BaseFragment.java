@@ -1,29 +1,17 @@
 package com.open.annotation.fragment;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Message;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
-import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.open.annotation.AnimateFirstDisplayListener;
 import com.open.annotation.MessageHanlder;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
 
 
 
@@ -38,7 +26,7 @@ import java.util.List;
  * @description: ***************************************************************************************************************************************************************************
  **/
 @EFragment
-public abstract class BaseFragment<T,F extends BaseFragment> extends Fragment {
+public abstract class BaseFragment<F extends BaseFragment> extends Fragment {
     public static final String TAG = BaseFragment.class.getSimpleName();
     public static final String KEY_CONTENT = BaseFragment.class.getSimpleName() + ":Content";
     public String mContent = "";
@@ -53,7 +41,7 @@ public abstract class BaseFragment<T,F extends BaseFragment> extends Fragment {
     protected Context mContext;
     /***分页信息*/
     int pageNo;
-    public List<T> list = new ArrayList<>();
+
 
     WeakReferenceHandler weakReferenceHandler;
     public View view;
@@ -89,13 +77,6 @@ public abstract class BaseFragment<T,F extends BaseFragment> extends Fragment {
 
     }
 
-    public List<T> getList() {
-        return list;
-    }
-
-    public void setList(List<T> list) {
-        this.list = list;
-    }
 
     public void setFragment(F f) {
         weakReferenceHandler = new WeakReferenceHandler(f);
